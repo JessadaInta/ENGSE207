@@ -5,8 +5,8 @@
 // PART 1: STATE MANAGEMENT
 // ========================================
 
-let allTasks = [];       
-let currentFilter = 'ALL'; 
+let allTasks = [];
+let currentFilter = 'ALL';
 
 // ========================================
 // PART 2: DOM ELEMENTS
@@ -39,7 +39,7 @@ async function fetchTasks() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        allTasks = data.tasks;  // Update global state
+        allTasks = Array.isArray(data.data) ? data.data : [];  // Update global state
         renderTasks();           // Render tasks to Kanban board
     } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -70,7 +70,11 @@ async function createTask(taskData) {
         }
 
         const data = await response.json();
-        allTasks.unshift(data.task); // Add new task to beginning of array
+        if (!Array.isArray(allTasks)) {
+            allTasks = [];
+        }
+        allTasks.unshift(data.data);
+        // Add new task to beginning of array
         renderTasks();               // Update Kanban board
 
         // Reset form
@@ -92,8 +96,8 @@ async function createTask(taskData) {
 async function updateTaskStatus(taskId, newStatus) {
     showLoading();
     try {
-        const response = await fetch(`/api/tasks/${taskId}/status`, {
-            method: 'PATCH',
+        const response = await fetch(`/api/tasks/${taskId}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -104,20 +108,23 @@ async function updateTaskStatus(taskId, newStatus) {
             throw new Error('Failed to update task status');
         }
 
-        // Update task in allTasks array
+        const result = await response.json();
+
         const taskIndex = allTasks.findIndex(task => task.id === taskId);
         if (taskIndex !== -1) {
-            allTasks[taskIndex].status = newStatus;
+            allTasks[taskIndex] = result.data; // ใช้ task จาก backend
         }
 
-        renderTasks(); // Re-render Kanban board
+        renderTasks();
     } catch (error) {
         console.error('Error updating task status:', error);
-        alert('❌ Failed to update task status. Please try again.');
+        alert('❌ Failed to update task status');
     } finally {
         hideLoading();
     }
 }
+
+
 
 // ========================================
 // PART 6: API FUNCTIONS - DELETE TASK

@@ -11,7 +11,7 @@ Layered Architecture (3-tier)
 ---
 
 ## 📂 Project Structure
-
+```bash
 midterm-individual-675432100062/
 ├── src/
 │ ├── presentation/ # Layer 1: Presentation
@@ -38,7 +38,7 @@ midterm-individual-675432100062/
 ├── package.json
 ├── library.db # SQLite database
 └── README.md # Documentation
-
+```
 ---
 
 ## 🎯 Refactoring Summary

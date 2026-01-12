@@ -14,30 +14,30 @@ Layered Architecture (3-tier)
 
 midterm-individual-675432100062/
 ├── src/
-│   ├── presentation/              # Layer 1: Presentation
-│   │   ├── routes/
-│   │   │   └── bookRoutes.js       # กำหนด routes
-│   │   ├── controllers/
-│   │   │   └── bookController.js   # Handle HTTP requests/responses
-│   │   └── middlewares/
-│   │       └── errorHandler.js     # Error handling middleware
-│   │
-│   ├── business/                  # Layer 2: Business Logic
-│   │   ├── services/
-│   │   │   └── bookService.js      # Business logic & rules
-│   │   └── validators/
-│   │       └── bookValidator.js    # Validation logic
-│   │
-│   └── data/                      # Layer 3: Data Access
-│       ├── repositories/
-│       │   └── bookRepository.js   # Database operations
-│       └── database/
-│           └── connection.js       # Database connection
+│ ├── presentation/ # Layer 1: Presentation
+│ │ ├── routes/
+│ │ │ └── bookRoutes.js # กำหนด routes
+│ │ ├── controllers/
+│ │ │ └── bookController.js # Handle HTTP requests/responses
+│ │ └── middlewares/
+│ │ └── errorHandler.js # Error handling middleware
+│ │
+│ ├── business/ # Layer 2: Business Logic
+│ │ ├── services/
+│ │ │ └── bookService.js # Business logic & rules
+│ │ └── validators/
+│ │ └── bookValidator.js # Validation logic
+│ │
+│ └── data/ # Layer 3: Data Access
+│ ├── repositories/
+│ │ └── bookRepository.js # Database operations
+│ └── database/
+│ └── connection.js # Database connection
 │
-├── server.js                      # Entry point
+├── server.js # Entry point
 ├── package.json
-├── library.db                     # SQLite database
-└── README.md                      # Documentation
+├── library.db # SQLite database
+└── README.md # Documentation
 
 ---
 
